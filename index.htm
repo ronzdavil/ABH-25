@@ -3,47 +3,66 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Happy Birthday Ahsan Bilal 🎂</title>
+<title>🎂 Happy Birthday Ahsan Bilal</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:"Poppins",sans-serif;}
 body{
-  height:100vh;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  height:100vh;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;flex-direction:column;
   background:radial-gradient(circle at top,#ff9a9e 0%,#fad0c4 100%);
-  overflow:hidden;color:#fff;text-align:center;
+  color:#fff;text-align:center;
 }
 
-/* --- Gift Box --- */
+/* --- Magical floating lights --- */
+.bg-light{
+  position:absolute;width:10px;height:10px;border-radius:50%;
+  background:rgba(255,255,255,.8);box-shadow:0 0 20px 10px rgba(255,255,255,.4);
+  animation:floatLight 10s linear infinite;
+}
+@keyframes floatLight{
+  0%{transform:translateY(0) scale(1);opacity:1;}
+  50%{transform:translateY(-200px) scale(1.2);opacity:.7;}
+  100%{transform:translateY(0) scale(1);opacity:1;}
+}
+
+/* --- Gift box --- */
 .gift{
-  position:relative;width:180px;height:180px;perspective:1000px;cursor:pointer;
+  position:relative;width:180px;height:180px;cursor:pointer;
   animation:float 3s ease-in-out infinite;
 }
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 
+/* Bottom box */
 .box{
-  position:absolute;width:100%;height:100%;
-  background:linear-gradient(145deg,#ff5f6d,#ffc371);
-  border-radius:15px;box-shadow:0 10px 30px rgba(0,0,0,.3);
+  width:100%;height:100%;border-radius:12px;position:absolute;
+  background:linear-gradient(145deg,#d90000,#ff4444);
+  box-shadow:0 10px 30px rgba(0,0,0,.3);
+  overflow:hidden;
 }
+/* Ribbon */
 .ribbon-vert,.ribbon-horiz{
-  position:absolute;background:#fff;
+  position:absolute;background:linear-gradient(90deg,#ffcc33,#ffea80);
 }
 .ribbon-vert{width:26px;height:100%;left:calc(50% - 13px);}
 .ribbon-horiz{height:26px;width:100%;top:calc(50% - 13px);}
 
+/* Lid */
 .lid{
-  position:absolute;width:100%;height:45px;background:linear-gradient(145deg,#ff758c,#ff7eb3);
-  border-radius:12px;top:-45px;
+  position:absolute;width:100%;height:50px;top:-50px;border-radius:10px;
+  background:linear-gradient(145deg,#ff5555,#d40000);
   transform-origin:bottom;transition:transform 1s ease,top 1s ease;
   box-shadow:0 6px 15px rgba(0,0,0,.2);
 }
-.open .lid{transform:rotateX(160deg) translateY(-10px);top:-60px;}
+.lid::before{
+  content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:120px;height:40px;background:radial-gradient(circle at center,#ffcc33 0%,#ffea80 70%);
+  border-radius:50% 50% 0 0; /* bow */
+  box-shadow:0 0 10px rgba(255,215,0,.5);
+}
+.open .lid{transform:rotateX(160deg) translateY(-10px);top:-70px;}
 
 /* Sparkles */
-.sparkles{
-  position:absolute;top:0;left:0;width:100%;height:100%;
-  pointer-events:none;overflow:visible;
-}
+.sparkles{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;}
 .sparkle{
   position:absolute;width:8px;height:8px;border-radius:50%;
   background:gold;animation:spark 1.2s ease-out forwards;
@@ -55,8 +74,8 @@ body{
 
 /* Card */
 .card{
-  opacity:0;transform:scale(0.8) translateY(50px);
-  transition:all 1.2s ease;
+  opacity:0;transform:scale(0.8) translateY(40px);
+  transition:all 1.3s ease;
   max-width:600px;padding:30px 20px;border-radius:20px;
   background:rgba(255,255,255,0.15);
   backdrop-filter:blur(10px);
@@ -64,8 +83,8 @@ body{
 }
 .show-card{opacity:1;transform:scale(1) translateY(0);animation:glowPulse 3s infinite alternate;}
 @keyframes glowPulse{
-  from{box-shadow:0 0 15px rgba(255,255,255,0.4);}
-  to{box-shadow:0 0 35px rgba(255,255,255,0.9);}
+  from{box-shadow:0 0 20px rgba(255,255,255,0.4);}
+  to{box-shadow:0 0 40px rgba(255,255,255,1);}
 }
 
 h1{
@@ -87,6 +106,13 @@ footer{position:absolute;bottom:15px;font-size:.9rem;color:rgba(255,255,255,.7);
 </head>
 <body>
 
+<!-- Floating lights background -->
+<div class="bg-light" style="top:70%;left:15%;animation-delay:0s;"></div>
+<div class="bg-light" style="top:80%;left:60%;animation-delay:2s;"></div>
+<div class="bg-light" style="top:50%;left:40%;animation-delay:4s;"></div>
+<div class="bg-light" style="top:90%;left:80%;animation-delay:6s;"></div>
+
+<!-- Gift box -->
 <div class="gift" id="gift">
   <div class="box">
     <div class="ribbon-vert"></div>
@@ -96,13 +122,14 @@ footer{position:absolute;bottom:15px;font-size:.9rem;color:rgba(255,255,255,.7);
   <div class="sparkles" id="sparkles"></div>
 </div>
 
+<!-- Card -->
 <div class="card" id="card">
   <h1>🎉 Happy Birthday, Ahsan Bilal! 🎂</h1>
-  <p>Today, the world celebrates <strong>you</strong> — your kindness, your energy, and your spirit that brightens every room you enter. 🌟</p>
-  <p>May this special day overflow with laughter, warmth, and memories that last forever.  
-  Let every heartbeat remind you how loved and appreciated you are. 💖</p>
-  <p>Here’s to a year ahead filled with success, health, and dreams coming true.  
-  Keep shining and never stop believing in yourself, because the world is better with you in it. 🌈</p>
+  <p>Today is all about celebrating <strong>you</strong> — the warmth you bring, the smiles you share, and the kindness that defines you. 🌟</p>
+  <p>May your journey ahead be bright and your heart always light.  
+  May success, laughter, and love follow you wherever you go. 💖</p>
+  <p>You deserve every joy this day can bring.  
+  Keep shining, dreaming, and inspiring — because the world is lucky to have you. 🌈</p>
 </div>
 
 <audio id="song">
@@ -118,9 +145,9 @@ const sparklesContainer=document.getElementById("sparkles");
 const card=document.getElementById("card");
 const song=document.getElementById("song");
 
-// ✨ Sparkles
+// Sparkles
 function createSparkles(){
-  for(let i=0;i<35;i++){
+  for(let i=0;i<40;i++){
     const s=document.createElement("div");
     s.classList.add("sparkle");
     s.style.left=Math.random()*100+"%";
@@ -131,7 +158,7 @@ function createSparkles(){
   }
 }
 
-// 🎁 Click to open
+// Gift click event
 gift.addEventListener("click",()=>{
   gift.classList.add("open");
   createSparkles();
@@ -143,16 +170,16 @@ gift.addEventListener("click",()=>{
   },1300);
 });
 
-// 🎊 Confetti auto
+// Confetti
 const canvas=document.createElement("canvas");
-canvas.style.position="fixed";
-canvas.style.top="0";canvas.style.left="0";
+canvas.style.position="fixed";canvas.style.top="0";canvas.style.left="0";
 canvas.style.width="100%";canvas.style.height="100%";
-canvas.style.pointerEvents="none";canvas.width=window.innerWidth;canvas.height=window.innerHeight;
+canvas.style.pointerEvents="none";
+canvas.width=window.innerWidth;canvas.height=window.innerHeight;
 document.body.appendChild(canvas);
 const ctx=canvas.getContext("2d");
 let confetti=[];
-for(let i=0;i<200;i++){
+for(let i=0;i<220;i++){
   confetti.push({
     x:Math.random()*canvas.width,
     y:Math.random()*canvas.height-canvas.height,
