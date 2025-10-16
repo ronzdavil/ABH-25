@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Ahsan Bilal 🎉</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #74ebd5, #acb6e5);
+      overflow-x: hidden;
+      color: #fff;
+      text-align: center;
+      position: relative;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      margin-top: 80px;
+      animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 10px #ff9, 0 0 20px #f39, 0 0 30px #fc3;
+      }
+      to {
+        text-shadow: 0 0 30px #f9c, 0 0 50px #fc3;
+      }
+    }
+
+    .sparkle {
+      display: inline-block;
+      position: relative;
+      color: gold;
+    }
+
+    .sparkle::after {
+      content: "✨";
+      position: absolute;
+      animation: sparkleAnim 1s infinite;
+      top: -10px;
+      right: -20px;
+      font-size: 1.5rem;
+    }
+
+    @keyframes sparkleAnim {
+      0%, 100% { opacity: 0; transform: scale(0.5) rotate(0deg); }
+      50% { opacity: 1; transform: scale(1.3) rotate(20deg); }
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin: 20px auto;
+      max-width: 600px;
+      line-height: 1.6;
+    }
+
+    .carousel {
+      margin: 40px auto;
+      width: 90%;
+      max-width: 500px;
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .slides {
+      display: flex;
+      transition: transform 0.8s ease-in-out;
+    }
+
+    .slides img {
+      width: 100%;
+      border-radius: 20px;
+    }
+
+    .cake {
+      margin: 40px auto;
+      position: relative;
+      width: 120px;
+      height: 100px;
+      background: #ff99aa;
+      border-radius: 0 0 20px 20px;
+      box-shadow: inset 0 -10px #ff6f91;
+    }
+
+    .candle {
+      position: absolute;
+      width: 10px;
+      height: 40px;
+      background: #fff;
+      top: -40px;
+      left: calc(50% - 5px);
+      border-radius: 3px;
+    }
+
+    .flame {
+      position: absolute;
+      top: -15px;
+      left: calc(50% - 5px);
+      width: 10px;
+      height: 15px;
+      background: radial-gradient(ellipse at center, #ff0 0%, #f60 60%, transparent 70%);
+      border-radius: 50%;
+      animation: flicker 0.2s infinite;
+    }
+
+    @keyframes flicker {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(0.9); opacity: 0.8; }
+    }
+
+    .confetti {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 9999;
+    }
+
+    button {
+      background: #fff;
+      color: #333;
+      border: none;
+      padding: 12px 20px;
+      font-size: 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+      margin: 10px;
+    }
+
+    button:hover {
+      background: #f39;
+      color: #fff;
+      transform: scale(1.05);
+    }
+
+    footer {
+      margin-top: 60px;
+      font-size: 0.9rem;
+      padding-bottom: 30px;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
+      p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>🎉 Happy Birthday, <span class="sparkle">Ahsan Bilal</span>! 🎂</h1>
+  <p>
+    Wishing you joy, success, and endless happiness on your special day!  
+    May your year ahead be filled with laughter and unforgettable memories.
+  </p>
+
+  <div class="carousel">
+    <div class="slides" id="slides">
+      <img src="https://i.imgur.com/Wt7d9yX.jpg" alt="Birthday Cake" />
+      <img src="https://i.imgur.com/6YVZVd2.jpg" alt="Balloons" />
+      <img src="https://i.imgur.com/hSuYk4L.jpg" alt="Confetti" />
+    </div>
+  </div>
+
+  <div class="cake" id="cake">
+    <div class="candle"></div>
+    <div class="flame" id="flame"></div>
+  </div>
+
+  <button id="confettiBtn">Throw Confetti 🎊</button>
+  <button id="blowBtn">Blow Out Candles 🕯️</button>
+
+  <audio id="bgMusic" loop>
+    <source src="https://cdn.pixabay.com/audio/2023/07/10/audio_37dcd68e7b.mp3" type="audio/mp3" />
+  </audio>
+  <button id="musicBtn">Play Music 🎵</button>
+
+  <canvas class="confetti" id="confettiCanvas"></canvas>
+
+  <footer>Made with ❤️ for Ahsan Bilal – October 16</footer>
+
+  <script>
+    // 🎵 Music control
+    const music = document.getElementById("bgMusic");
+    const musicBtn = document.getElementById("musicBtn");
+    let playing = false;
+
+    musicBtn.addEventListener("click", () => {
+      if (!playing) {
+        music.play();
+        musicBtn.textContent = "Pause Music ⏸️";
+      } else {
+        music.pause();
+        musicBtn.textContent = "Play Music 🎵";
+      }
+      playing = !playing;
+    });
+
+    // 🎠 Carousel
+    const slides = document.getElementById("slides");
+    let index = 0;
+    setInterval(() => {
+      index = (index + 1) % 3;
+      slides.style.transform = `translateX(-${index * 100}%)`;
+    }, 2500);
+
+    // 🎊 Confetti effect
+    const confettiCanvas = document.getElementById("confettiCanvas");
+    const ctx = confettiCanvas.getContext("2d");
+    confettiCanvas.width = window.innerWidth;
+    confettiCanvas.height = window.innerHeight;
+
+    const confetti = [];
+    for (let i = 0; i < 150; i++) {
+      confetti.push({
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight - window.innerHeight,
+        r: Math.random() * 6 + 2,
+        d: Math.random() * 1 + 1,
+        color: `hsl(${Math.random() * 360}, 100%, 60%)`,
+      });
+    }
+
+    function drawConfetti() {
+      ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+      confetti.forEach((c) => {
+        ctx.beginPath();
+        ctx.arc(c.x, c.y, c.r, 0, 2 * Math.PI);
+        ctx.fillStyle = c.color;
+        ctx.fill();
+      });
+      moveConfetti();
+    }
+
+    function moveConfetti() {
+      confetti.forEach((c) => {
+        c.y += c.d;
+        if (c.y > window.innerHeight) {
+          c.y = -10;
+          c.x = Math.random() * window.innerWidth;
+        }
+      });
+    }
+
+    document.getElementById("confettiBtn").addEventListener("click", () => {
+      const confettiInterval = setInterval(drawConfetti, 20);
+      setTimeout(() => {
+        clearInterval(confettiInterval);
+        ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+      }, 5000);
+    });
+
+    // 🕯️ Blow out candle animation
+    const flame = document.getElementById("flame");
+    const blowBtn = document.getElementById("blowBtn");
+
+    blowBtn.addEventListener("click", () => {
+      flame.style.transition = "opacity 1s ease-out, transform 1s ease-out";
+      flame.style.opacity = 0;
+      flame.style.transform = "translateY(-20px) scale(0)";
+      setTimeout(() => {
+        blowBtn.textContent = "Candles Blown Out 🎉";
+        const wish = document.createElement("p");
+        wish.innerText = "🎈 Happy Birthday once again, Ahsan Bilal! 🎂";
+        wish.style.marginTop = "20px";
+        wish.style.fontWeight = "bold";
+        document.body.appendChild(wish);
+      }, 1200);
+    });
+  </script>
+</body>
+</html>
